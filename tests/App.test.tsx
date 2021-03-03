@@ -5,7 +5,7 @@ import App from '../src/components/App';
 
 it('App is rendered', () => {
     // Render App in the document
-    const appElement: App = TestUtils.renderIntoDocument(
+    const appElement: any = TestUtils.renderIntoDocument(
         <App/>
     );
 
