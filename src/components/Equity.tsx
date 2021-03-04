@@ -18,7 +18,7 @@ export default class Equity extends Component<{}, EquityState> {
     getData() {
         const parsed = qs.parse(location.search);
         const token=parsed.s;
-        fetch('./'+token+'.json',{ headers : 
+        fetch('./equities/'+token+'.json',{ headers : 
             { 
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
