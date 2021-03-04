@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Statistic, Row, Col, Typography, Button, Divider } from 'antd';
 const { Text } = Typography;
+import * as qs from 'query-string';
 
 type EquityState = {
     data: any,
@@ -15,7 +16,9 @@ export default class Equity extends Component<{}, EquityState> {
     }
 
     getData() {
-        fetch('./tony.json',{ headers : 
+        const parsed = qs.parse(location.search);
+        const token=parsed.s;
+        fetch('./'+token+'.json',{ headers : 
             { 
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
