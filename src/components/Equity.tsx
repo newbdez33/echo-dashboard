@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Statistic, Row, Col, Typography, Button, Divider } from 'antd';
 const { Text } = Typography;
 import * as qs from 'query-string';
+import Search from 'antd/lib/input/Search';
 
 type EquityState = {
     data: any,
@@ -15,10 +16,20 @@ export default class Equity extends Component<{}, EquityState> {
         msg:"Loading data..."
     }
 
-    getData() {
-        const parsed = qs.parse(location.search);
-        const token=parsed.s;
-        fetch('./equities/'+token+'.json',{ headers : 
+
+    getData(value:any|null) {
+
+        console.log(value);
+        let url = '';
+        if ( value == null ) {
+            const parsed = qs.parse(location.search);
+            const token=parsed.s;
+            url = './equities/'+token+'.json';
+        }else {
+            url = './equities/'+value+'.json';
+        }
+        
+        fetch(url,{ headers : 
             { 
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -36,7 +47,7 @@ export default class Equity extends Component<{}, EquityState> {
     }
 
     componentDidMount() {
-        this.getData();
+        this.getData(null);
     }
 
     render() {
@@ -62,7 +73,14 @@ export default class Equity extends Component<{}, EquityState> {
                 </div>
               );
         }else {
-            return <p>{this.state.msg}</p>
+            return (
+                    <Search
+                    placeholder="Authorization code"
+                    allowClear
+                    enterButton="Enter"
+                    size="large"
+                    onSearch={this.getData.bind(this)}
+                    />)
         }
     }
 }
