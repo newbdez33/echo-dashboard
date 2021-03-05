@@ -28,6 +28,7 @@ export default class Equity extends Component<{}, EquityState> {
         }else {
             url = './equities/'+value+'.json';
         }
+        url = url + "?" + Date.now();
         
         fetch(url,{ headers : 
             { 
