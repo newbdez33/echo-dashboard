@@ -71,6 +71,7 @@
   "dependencies": {
     "@types/antd": "^1.0.0",
     "antd": "^4.13.0",
+    "luxon": "^1.26.0",
     "query-string": "^5.1.1"
   }
 }

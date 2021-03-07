@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Statistic, Row, Col, Typography, Button, Divider } from 'antd';
+import { Statistic, Row, Col, Typography, Button, Divider, List } from 'antd';
 const { Text } = Typography;
 import * as qs from 'query-string';
 import Search from 'antd/lib/input/Search';
+import { DateTime } from "luxon";
 
 type EquityState = {
     data: any,
@@ -69,6 +70,14 @@ export default class Equity extends Component<{}, EquityState> {
                             <Statistic title={"Previous Equity (" + this.state.data.previous_updated + ")"} value={this.state.data.previous_equity} precision={2} />
                         </Col>
                     </Row>
+                    <Divider />
+                    <List
+                    size="small"
+                    header={<Text type="secondary">Funding fee(USDT) history in 7 days</Text>}
+                    dataSource={this.state.data.income.reverse()}
+                    renderItem={(item:any) => <List.Item>{item.income} <Text type="secondary">{DateTime.fromMillis(item.time).toLocaleString(DateTime.DATETIME_SHORT)}</Text></List.Item>}
+                    />
+                    <Text type="secondary">{"Total: " + this.state.data.income.map((item: { income: any; }) => item.income).reduce((prev: string, next: string) => parseFloat(prev) + parseFloat(next))}</Text>
                     <Divider />
                     <Text type="secondary">Last updated: {this.state.data.updated}</Text>
                 </div>
