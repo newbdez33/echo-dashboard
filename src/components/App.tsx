@@ -5,13 +5,11 @@ import 'antd/dist/antd.css';
 
 const reactLogo = require("./../assets/img/react_logo.svg");
 import "./../assets/scss/App.scss";
-import Title from "antd/lib/typography/Title";
 
 class App extends React.Component<Record<string, unknown>, undefined> {
   public render() {
     return (
       <div className="app">
-        <Title level={3}>Equity (USDT)</Title>
         <Equity />
       </div>
     );

@@ -4,6 +4,7 @@ const { Text } = Typography;
 import * as qs from 'query-string';
 import Search from 'antd/lib/input/Search';
 import { DateTime } from "luxon";
+import Title from 'antd/lib/typography/Title';
 
 type EquityState = {
     data: any,
@@ -56,18 +57,19 @@ export default class Equity extends Component<{}, EquityState> {
         if ( this.state.msg == "" ) {
             return  (
                 <div>
+                    <Title level={3}>{"Equity (USDT) in " + this.state.data.duration + " days"}</Title>
                     <Row gutter={16}>
                         <Col span={10}>
-                            <Statistic title="Current Equity" value={this.state.data.current_equity} precision={2} />
+                            <Statistic title="Current" value={this.state.data.current_equity} precision={2} />
                         </Col>
                         <Col span={8}>
-                            <Statistic title={"Profit in " + this.state.data.duration + " days"} value={this.state.data.profit} precision={2} />
+                            <Statistic title="Profit" value={this.state.data.profit} precision={2} />
                         </Col>
                         <Col span={6}>
-                            <Statistic title={"APR in " + this.state.data.duration + " days"} value={this.state.data.apr} suffix="%" />
+                            <Statistic title="APR" value={this.state.data.apr} suffix="%" />
                         </Col>
                         <Col span={10} style={{ marginTop: 16 }}>
-                            <Statistic title={"Previous Equity (" + this.state.data.previous_updated + ")"} value={this.state.data.previous_equity} precision={2} />
+                            <Statistic title={"Previous (" + this.state.data.previous_updated + ")"} value={this.state.data.previous_equity} precision={2} />
                         </Col>
                     </Row>
                     <Divider />
